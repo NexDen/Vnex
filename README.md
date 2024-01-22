@@ -19,9 +19,9 @@
     ```
   - Run `npm i` in the main directory and run `node index.js` to run the bot!
   - If it works you should see this in the output:
-    ``` 
+    ```
     [WARNING] No commands found.
-    Connected to (Your bot's username)!
+    Connected to {Your bot's username}!
     ```
   - Adding commands to the "commands" directory will make the warning go away.
   - Create an example file in the "commands" directory with the following code:

@@ -1,12 +1,17 @@
-var {token} = require("./config.json")
-var { Client, Collection, GatewayIntentBits } = require("discord.js")
+var colors = require("./colors.js")
+try {
+    var {token} = require("./config.json")
+} catch (err) {
+    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} config.json not found.`)
+    process.exit(1)
+}
+    var { Client, Collection, GatewayIntentBits } = require("discord.js")
 
 const fs = require("node:fs")
 const path = require("node:path")
 
 const debug = false;
 
-var colors = require("./colors.js")
 
 const client = new Client({
     intents: [
