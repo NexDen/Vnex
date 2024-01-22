@@ -38,7 +38,7 @@ async function handle_mentionable_select_menu(interaction) {
 
     console.log(interaction.values)
     await interaction.deferUpdate()
-    return console.log(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} User Select Menu işleme kısmı eklenmemiş.`)
+    return console.log(`${colors.Blink}${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} User Select Menu işleme kısmı eklenmemiş.`)
 }
 
 module.exports = {

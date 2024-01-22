@@ -7,7 +7,7 @@ async function handle_modal(interaction) {
     /*
     interaction.fields.getTextInputValue('customId')
     */
-    return console.log(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} Modal işleme kısmı eklenmemiş.`)
+    return console.log(`${colors.Blink}${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} Modal işleme kısmı eklenmemiş.`)
 
 
 }

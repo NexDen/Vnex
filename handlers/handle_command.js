@@ -5,7 +5,7 @@ async function handle_command(interaction){
     const command = interaction.client.commands.get(interaction.commandName)
             
     if (!command) {
-        console.error(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[KOMUT BULUNAMADI]${colors.Reset} /${interaction.commandName}`)
+        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[KOMUT BULUNAMADI]${colors.Reset} /${interaction.commandName}`)
     }
     
     try {

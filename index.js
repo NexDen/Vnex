@@ -37,11 +37,11 @@ for (const file of commandFiles) {
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
 	} else if (!('data' in command) && !('execute' in command)){
-        console.log(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını ve "execute" komutunu barındırmıyor.`);
+        console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını ve "execute" komutunu barındırmıyor.`);
     } else if (!("execute" in command)){
-		console.log(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "execute" fonksiyonunu barındırmıyor.`);
+		console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "execute" fonksiyonunu barındırmıyor.`);
 	} else if (!("data" in command)){
-		console.log(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını barındırmıyor.`);
+		console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını barındırmıyor.`);
     }
 }
 
