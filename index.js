@@ -21,7 +21,7 @@ global.client = client
 global.debug = debug
 
 client.once('ready', () => { 
-    console.log(`${colors.FgYellow}${client.user.username}${colors.Reset}${colors.Bright}'a bağlanıldı!${colors.Reset}`)
+    console.log(`${colors.Bright}Connected to ${colors.Reset}${colors.FgYellow}${client.user.username}!${colors.Reset}`)
     client.user.setPresence({ activities: [{ name: 'discord.js v14'}], status: 'online' });
 });
 
@@ -30,26 +30,31 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	// Set a new item in the Collection with the key as the command name and the value as the exported module
-	if ('data' in command && 'execute' in command) {
-		client.commands.set(command.data.name, command);
-	} else if (!('data' in command) && !('execute' in command)){
-        console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını ve "execute" komutunu barındırmıyor.`);
-    } else if (!("execute" in command)){
-		console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "execute" fonksiyonunu barındırmıyor.`);
-	} else if (!("data" in command)){
-		console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} ${filePath} komutu "data" kısmını barındırmıyor.`);
+if (commandFiles.length === 0) {
+    console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} No commands found.`);
+}
+else {
+    for (const file of commandFiles) {
+        const filePath = path.join(commandsPath, file);
+        const command = require(filePath);
+        // Set a new item in the Collection with the key as the command name and the value as the exported module
+        if ('data' in command && 'execute' in command) {
+            client.commands.set(command.data.name, command);
+        } else if (!('data' in command) && !('execute' in command)){
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain a "data" property and an "execute" function.`);
+        } else if (!("execute" in command)){
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain an "execute" function.`);
+        } else if (!("data" in command)){
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain a "data" property.`);
+        }
     }
 }
 
 client.on("error", error => {
-    console.error(`${colors.Bright}${colors.BgRed}${colors.FgWhite}[HATA]${colors.Reset} ${error}`)
+    console.error(`${colors.Bright}${colors.BgRed}${colors.FgWhite}${colors.Blink}[ERROR]${colors.Reset} ${error}`)
 })
 
-const { düzenle_log } = require("./message_logger.js")
+const { edit_log } = require("./message_logger.js")
 
 const { handle_string_select_menu, handle_role_select_menu, handle_mentionable_select_menu, handle_channel_select_menu } = require("./handlers/handle_select_menus.js")
 
@@ -87,9 +92,9 @@ client.on("interactionCreate", async interaction => {
 })
 
 client.on("guildCreate", async guild => {
-    var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
-    var sunucu_isim = guild.name
-    console.log(`${colors.Bright}${colors.FgRed}[SUNUCUYA-EKLENME] ${colors.FgYellow}${şuan} ${colors.FgGreen}${sunucu_isim}`)
+    var now = new Date(Date.now()).toLocaleTimeString("tr-TR")
+    var guild_name = guild.name
+    console.log(`${colors.Bright}${colors.FgRed}[ADDED TO SERVER] ${colors.FgYellow}${now} ${colors.FgGreen}${guild_name}`)
 })
 
 client.on("guildMemberAdd", async member => {
@@ -105,7 +110,7 @@ client.on("messageCreate", async message =>{
 })
 
 client.on("messageUpdate", async (oldMessage, newMessage) =>{
-    düzenle_log(oldMessage, newMessage)
+    edit_log(oldMessage, newMessage)
 })
 
 client.login(token)

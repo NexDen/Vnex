@@ -1,7 +1,7 @@
-const { mesaj_log } = require("../message_logger.js")
+const { message_log } = require("../message_logger.js")
 
 async function handle_messages(message) {
-    mesaj_log(message)
+    message_log(message)
 }
 
 module.exports = {

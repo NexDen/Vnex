@@ -16,18 +16,18 @@ const rest = new REST({ version: '10' }).setToken(token);
 	try {
 		
 		if (commands.length === 0) {
-			console.log("Komut bulunamadı, botun komutları temizleniyor.");
+			console.log("No commands found, clearing all commands.");
 			rest.put(Routes.applicationCommands(clientId), { body: [] })
-				.then(() => console.log('Bütün komutlar temizlendi.'))
+				.then(() => console.log('All commands have been cleared.'))
 				.catch(console.error);
 		}
 		else {
-			console.log(`${commands.length} tane komut yazılıyor.`);
+			console.log(`Writing ${commands.length} commands.`);
 			const data = await rest.put(
 				Routes.applicationCommands(clientId),
 				{ body: commands },
 			);
-			console.log(`${data.length} tane komut yazıldı.`);
+			console.log(`Successfully wrote ${data.length} commands.`);
 		}
 	} catch (error) {
 		console.error(error);

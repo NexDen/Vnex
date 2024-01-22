@@ -12,7 +12,7 @@ var RESET = colors.Reset
 
 const client = global.client
 
-async function mesaj_log(message){
+async function message_log(message){
     var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
     var tür = ""
     if (message.author.id === client.user.id){
@@ -32,7 +32,7 @@ async function mesaj_log(message){
     fs.appendFileSync(`./LOGS/${message.guild.name} (${message.guild.id})/#${message.channel.name} (${message.channel.id}).txt`, `\n${şuan} / ${message.author.username}<@${message.author.id}>: ${message.content}`, {flag: "a+"})
 }
 
-async function komut_log(interaction){
+async function command_log(interaction){
     var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
     var çıkış = `${COMMAND}[KOMUT]${RESET} ${TIME}${şuan} ${GUILD}${interaction.guild} ${CHANNEL}#${interaction.channel.name} ${USER}${interaction.user.username}<@${interaction.user.id}>: ${COMMANDNAME}/${interaction.commandName} ${RESET}`
     var args = ""
@@ -48,7 +48,7 @@ async function komut_log(interaction){
     console.log(çıkış)
     fs.appendFileSync(`./LOGS/${interaction.guild.name} (${interaction.guild.id})/#${interaction.channel.name} (${interaction.channel.id}).txt`, `\n[KOMUT] ${şuan} / ${interaction.user.username}<@${interaction.user.id}>: /${interaction.commandName} ${args}`, {flag: "a+"})
 }
-async function düzenle_log(oldMessage, newMessage){
+async function edit_log(oldMessage, newMessage){
     var tür = ""
     var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
 
@@ -69,5 +69,5 @@ async function düzenle_log(oldMessage, newMessage){
     fs.appendFileSync(`./LOGS/${oldMessage.guild.name} (${oldMessage.guild.id})/#${oldMessage.channel.name} (${oldMessage.channel.id}).txt`, `\n[MESAJ-DÜZENLEME] ${şuan} ${oldMessage.author.username}<@${oldMessage.author.id}>: ${oldMessage.content} -> ${newMessage.content}`, {flag: "a+"})
 }
 module.exports = {
-    mesaj_log , komut_log , düzenle_log
+    command_log , edit_log , message_log
 }

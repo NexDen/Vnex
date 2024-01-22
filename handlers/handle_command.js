@@ -5,7 +5,7 @@ async function handle_command(interaction){
     const command = interaction.client.commands.get(interaction.commandName)
             
     if (!command) {
-        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[KOMUT BULUNAMADI]${colors.Reset} /${interaction.commandName}`)
+        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[COMMAND NOT FOUND]${colors.Reset} /${interaction.commandName}`)
     }
     
     try {
@@ -15,12 +15,12 @@ async function handle_command(interaction){
         console.error(err)
         try {
             await interaction.reply({
-                content: "Komut çalıştırırken bir hata oluştu.",
+                content: "An error occured.",
                 ephemeral: true
             })
         } catch (err) {
             await interaction.editReply({
-                content: "Komut çalıştırırken bir hata oluştu.",
+                content: "An error occured.",
                 ephemeral: true
             })
         }

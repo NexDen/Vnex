@@ -8,7 +8,7 @@ async function handle_context_menu(interaction) {
     global.target_user = interaction.targetMember 
     */
     
-    return console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} Context menu işleme kısmı eklenmemiş.`)
+    return console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[UYARI]${colors.Reset} The context menu handler has not been implemented.`)
 
 }
 
