@@ -42,7 +42,6 @@
     ```
   - You can change the command's name by modifying the `.setName` field and the command description by modifying the `.setDescription` field. (The filename doesnt have to match the command name.)
   - When the command gets called by someone, the `execute` function will run, so put everything that needs to get run in there.
-  - When ready, run `node deploy-commands.js` to deploy the command to your discord bot. (Because of Discord's caching, you may need to restart Discord on your end to see the new commands.)
   - To make context menu commands, you can use this example file:
     ```js
       const { ContextMenuCommandBuilder, ApplicationCommandType } = require("discord.js")
@@ -59,5 +58,7 @@
         }
       }
     ```
+  - When ready, run `node deploy-commands.js` to deploy the command to your discord bot. (Because of Discord's caching, you may need to restart Discord on your end to see the new commands.)
+  
 - Refer to [The discord.js Guide](https://discordjs.guide) for further examples.
 - (Knowledge of JavaScript not included.)
