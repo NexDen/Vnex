@@ -24,7 +24,7 @@
     Connected to (Your bot's username)!
     ```
   - Adding commands to the "commands" directory will make the warning go away.
-  - Create an example file in the "commands" directory with the following syntax:
+  - Create an example file in the "commands" directory with the following code:
     ```js
     const { SlashCommandBuilder } = require("discord.js")
 
@@ -42,5 +42,22 @@
     ```
   - You can change the command's name by modifying the `.setName` field and the command description by modifying the `.setDescription` field. (The filename doesnt have to match the command name.)
   - When the command gets called by someone, the `execute` function will run, so put everything that needs to get run in there.
-  - When ready, run `node deploy-commands.js` to deploy the command to your discord bot. (This might take a few minutes if you are redeploying an already existing command.)
+  - When ready, run `node deploy-commands.js` to deploy the command to your discord bot. (Because of Discord's caching, you may need to restart Discord on your end to see the new commands.)
+  - To make context menu commands, you can use this example file:
+    ```js
+      const { ContextMenuCommandBuilder, ApplicationCommandType } = require("discord.js")
+
+      module.exports = {
+          data: new ContextMenuCommandBuilder()
+              .setName("Ping")
+              .setType(ApplicationCommandType.User),
+          async execute(interaction){
+            return interaction.reply({
+                content: `Pong!`,
+                ephemeral: true
+            })
+        }
+      }
+    ```
+- Refer to [The discord.js Guide](https://discordjs.guide) for further examples.
 - (Knowledge of JavaScript not included.)

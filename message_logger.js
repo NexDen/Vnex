@@ -2,7 +2,7 @@ var colors = require("./colors.js")
 var fs = require("fs")
 
 var MESSAGE = colors.Bright + colors.FgRed //41-37
-var COMMAND = colors.Bright + colors.BgCyan + colors.FgWhite //46-37
+var COMMAND = colors.Bright + colors.FgCyan //46-37
 var TIME = colors.Bright + colors.FgYellow //33-37
 var GUILD = colors.Bright + colors.FgGreen //32-37
 var CHANNEL = colors.Bright + colors.FgBlue //34-37
