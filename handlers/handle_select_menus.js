@@ -1,5 +1,5 @@
 client = global.client
-const colors = require("../colors.js")
+const colors = global.colors
 
 
 async function handle_string_select_menu(interaction) {

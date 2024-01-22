@@ -1,4 +1,5 @@
 var colors = require("./colors.js")
+global.colors = colors
 try {
     try {
         var {token} = require("./config.json")

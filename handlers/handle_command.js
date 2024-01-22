@@ -1,5 +1,5 @@
 const { command_log } = require("../message_logger.js")
-
+const colors = global.colors
 async function handle_command(interaction){
     
     const command = interaction.client.commands.get(interaction.commandName)

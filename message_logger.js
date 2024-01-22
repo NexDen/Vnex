@@ -1,4 +1,4 @@
-var colors = require("./colors.js")
+var colors = global.colors
 var fs = require("fs")
 
 var MESSAGE = colors.Bright + colors.FgRed //41-37
@@ -16,12 +16,12 @@ async function message_log(message){
     var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
     var tür = ""
     if (message.author.id === client.user.id){
-        tür = COMMAND + "[KOMUT-CEVAP]" + RESET
+        tür = COMMAND + "[COMMAND RESPONSE]" + RESET
     } 
     else if (message.attachments.size) { // direk message.attachments yazınca olmuyordu
-        tür = MESSAGE + "[EKLİ MESAJ]" + RESET
+        tür = MESSAGE + "[MESSAGE WITH ATTACHMENT]" + RESET
     } else {
-        tür = MESSAGE + "[MESAJ]" + RESET
+        tür = MESSAGE + "[MESSAGE]" + RESET
     }
     var dir = `./LOGS/${message.guild.name} (${message.guild.id})`
 
@@ -34,7 +34,7 @@ async function message_log(message){
 
 async function command_log(interaction){
     var şuan = new Date(Date.now()).toLocaleTimeString("tr-TR")
-    var çıkış = `${COMMAND}[KOMUT]${RESET} ${TIME}${şuan} ${GUILD}${interaction.guild} ${CHANNEL}#${interaction.channel.name} ${USER}${interaction.user.username}<@${interaction.user.id}>: ${COMMANDNAME}/${interaction.commandName} ${RESET}`
+    var çıkış = `${COMMAND}[COMMAND]${RESET} ${TIME}${şuan} ${GUILD}${interaction.guild} ${CHANNEL}#${interaction.channel.name} ${USER}${interaction.user.username}<@${interaction.user.id}>: ${COMMANDNAME}/${interaction.commandName} ${RESET}`
     var args = ""
     interaction.options.data.forEach(option =>{
         args += `[${option.name}: ${option.value}] `
@@ -46,7 +46,7 @@ async function command_log(interaction){
         fs.mkdirSync(dir, { recursive: true })
     }
     console.log(çıkış)
-    fs.appendFileSync(`./LOGS/${interaction.guild.name} (${interaction.guild.id})/#${interaction.channel.name} (${interaction.channel.id}).txt`, `\n[KOMUT] ${şuan} / ${interaction.user.username}<@${interaction.user.id}>: /${interaction.commandName} ${args}`, {flag: "a+"})
+    fs.appendFileSync(`./LOGS/${interaction.guild.name} (${interaction.guild.id})/#${interaction.channel.name} (${interaction.channel.id}).txt`, `\n[COMMAND] ${şuan} / ${interaction.user.username}<@${interaction.user.id}>: /${interaction.commandName} ${args}`, {flag: "a+"})
 }
 async function edit_log(oldMessage, newMessage){
     var tür = ""
@@ -55,10 +55,10 @@ async function edit_log(oldMessage, newMessage){
     if (newMessage.embeds.length !== 0){return}
     
     if (oldMessage.author.username === client.user.username){
-        tür = COMMAND + "[KOMUT-CEVAP-DÜZENLEME]" + RESET
+        tür = COMMAND + "[COMMAND RESPONSE EDIT]" + RESET
     }
     else {
-        tür = MESSAGE + "[MESAJ-DÜZENLEME]" + RESET
+        tür = MESSAGE + "[MESSAGE EDIT]" + RESET
     }
     var dir = `./LOGS/${oldMessage.guild.name} (${oldMessage.guild.id})`;
 
@@ -66,7 +66,7 @@ async function edit_log(oldMessage, newMessage){
         fs.mkdirSync(dir, { recursive: true })
     }
     console.log(`${tür} ${TIME}${şuan} ${GUILD}${oldMessage.guild} ${CHANNEL}#${oldMessage.channel.name} ${USER}${oldMessage.author.username}<@${oldMessage.author.id}>: ${MESSAGE}${oldMessage.content} -> ${newMessage.content} ${RESET}`)
-    fs.appendFileSync(`./LOGS/${oldMessage.guild.name} (${oldMessage.guild.id})/#${oldMessage.channel.name} (${oldMessage.channel.id}).txt`, `\n[MESAJ-DÜZENLEME] ${şuan} ${oldMessage.author.username}<@${oldMessage.author.id}>: ${oldMessage.content} -> ${newMessage.content}`, {flag: "a+"})
+    fs.appendFileSync(`./LOGS/${oldMessage.guild.name} (${oldMessage.guild.id})/#${oldMessage.channel.name} (${oldMessage.channel.id}).txt`, `\n[MESSAGE EDIT] ${şuan} ${oldMessage.author.username}<@${oldMessage.author.id}>: ${oldMessage.content} -> ${newMessage.content}`, {flag: "a+"})
 }
 module.exports = {
     command_log , edit_log , message_log

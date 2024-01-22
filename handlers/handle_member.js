@@ -1,3 +1,4 @@
+const colors = global.colors
 async function handle_member_add(interaction){
     return console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} The member join handler has not been implemented.`)
 }

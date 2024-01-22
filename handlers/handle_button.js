@@ -1,5 +1,5 @@
 const client = global.client
-var colors = require("../colors.js")
+var colors = global.colors
 
 async function handle_button(interaction) {
     await interaction.deferUpdate()

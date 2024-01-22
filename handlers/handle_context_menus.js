@@ -1,5 +1,4 @@
-const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle } = require("discord.js")
-const colors = require("../colors.js")
+const colors = global.colors
 client = global.client
 const { command_log } = require("../message_logger.js")
 
