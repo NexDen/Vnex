@@ -1,4 +1,4 @@
-const { komut_log } = require("../message_logger.js")
+const { command_log } = require("../message_logger.js")
 
 async function handle_command(interaction){
     
@@ -10,7 +10,7 @@ async function handle_command(interaction){
     
     try {
         await command.execute(interaction)
-        komut_log(interaction)
+        command_log(interaction)
     } catch (err){
         console.error(err)
         try {
