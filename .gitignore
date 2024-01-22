@@ -3,3 +3,4 @@ LOGS
 todos.txt
 config.json
 commands/*
+node_modules

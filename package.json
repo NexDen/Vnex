@@ -1,0 +1,26 @@
+{
+  "name": "vnex",
+  "version": "1.0.0",
+  "description": "The vNex Discord Bot Infrastructure",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^14"
+  },
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/NexDen/Vnex/"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "infrastructure",
+    "vnex",
+    "vorty",
+    "nexden"
+  ],
+  "author": "NexDen",
+  "license": "ISC"
+}
