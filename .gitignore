@@ -1,4 +1,5 @@
+.gitignore
 LOGS
 todos.txt
-tokens.json
+config.json
 fonksiyonlar/*

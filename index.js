@@ -1,4 +1,4 @@
-var {token} = require("./tokens.json")
+var {token} = require("./config.json")
 var { Client, Collection, GatewayIntentBits } = require("discord.js")
 
 const fs = require("node:fs")
