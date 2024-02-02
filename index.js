@@ -2,19 +2,25 @@ var colors = require("./colors.js")
 global.colors = colors
 try {
     try {
-        var {token} = require("./config.json")
+        require("./config.json")
     } catch (err) {
-        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} Invalid token specified.`)
+        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} config.json not found.`)
         process.exit(1)
     }
+    var { token } = require("./config.json")
 } catch (err) {
-    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} config.json not found.`)
+    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} Invalid token specified.`)
     process.exit(1)
 }
-    var { Client, Collection, GatewayIntentBits } = require("discord.js")
+var { Client, Collection, GatewayIntentBits } = require("discord.js")
 
 const fs = require("node:fs")
 const path = require("node:path")
+
+if (!fs.existsSync("./commands")) {
+    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} No commands folder found, creating.`)
+    fs.mkdirSync("./commands")
+}
 
 const debug = false;
 
