@@ -1,26 +1,29 @@
 var colors = require("./colors.js")
+var util = require("util")
 global.colors = colors
 try {
     try {
         require("./config.json")
     } catch (err) {
-        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} config.json not found.`)
+        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.errorMessages.baseError}]${colors.Reset} ${config.errorMessages.noConfigFile}`)
         process.exit(1)
     }
-    var { token } = require("./config.json")
+    global.config = require("./config.json")
 } catch (err) {
-    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} Invalid token specified.`)
+    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.errorMessages.baseError}]${colors.Reset} ${config.errorMessages.invalidToken}`)
     process.exit(1)
 }
+
 var { Client, Collection, GatewayIntentBits } = require("discord.js")
 
 const fs = require("node:fs")
 const path = require("node:path")
 
 if (!fs.existsSync("./commands")) {
-    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[ERROR]${colors.Reset} No commands folder found, creating.`)
+    console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset} ${config.warningMessages.noCommandsFolder}`)
     fs.mkdirSync("./commands")
 }
+
 
 const debug = false;
 
@@ -37,9 +40,21 @@ const client = new Client({
 global.client = client
 global.debug = debug
 
-client.once('ready', () => { 
+client.once('ready', async () => { 
+
+    console.log(`  
+:::     ::: ::::    ::: :::::::::: :::    ::: 
+:+:     :+: :+:+:   :+: :+:        :+:    :+: 
++:+     +:+ :+:+:+  +:+ +:+         +:+  +:+  
++#+     +:+ +#+ +:+ +#+ +#++:++#     +#++:+   
+ +#+   +#+  +#+  +#+#+# +#+         +#+  +#+  
+  #+#+#+#   #+#   #+#+# #+#        #+#    #+# 
+    ###     ###    #### ########## ###    ###  
+    `)
+
+
     console.log(`${colors.Bright}Connected to ${colors.Reset}${colors.FgYellow}${client.user.username}!${colors.Reset}`)
-    client.user.setPresence({ activities: [{ name: 'discord.js v14'}], status: 'online' });
+    client.user.setPresence({ activities: [{ name: config.activityName}], status: 'online' });
 });
 
 client.commands = new Collection();
@@ -48,7 +63,7 @@ const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
 if (commandFiles.length === 0) {
-    console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} No commands found.`);
+    console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset} ${config.warningMessages.noCommands}`);
 }
 else {
     for (const file of commandFiles) {
@@ -58,17 +73,17 @@ else {
         if ('data' in command && 'execute' in command) {
             client.commands.set(command.data.name, command);
         } else if (!('data' in command) && !('execute' in command)){
-            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain a "data" property and an "execute" function.`);
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset} ` +  util.format(config.warningMessages.noDataExecute, filePath));
         } else if (!("execute" in command)){
-            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain an "execute" function.`);
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset} ` +  util.format(config.warningMessages.noExecute, filePath));
         } else if (!("data" in command)){
-            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[WARNING]${colors.Reset} Command ${filePath} doesn't contain a "data" property.`);
+            console.log(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset} ` +  util.format(config.warningMessages.noData, filePath));
         }
     }
 }
 
 client.on("error", error => {
-    console.error(`${colors.Bright}${colors.BgRed}${colors.FgWhite}${colors.Blink}[ERROR]${colors.Reset} ${error}`)
+    console.error(`${colors.Bright}${colors.BgRed}${colors.FgWhite}${colors.Blink}[${config.errorMessages.baseError}]${colors.Reset} ${error}`)
 })
 
 const { edit_log } = require("./message_logger.js")
@@ -111,7 +126,7 @@ client.on("interactionCreate", async interaction => {
 client.on("guildCreate", async guild => {
     var now = new Date(Date.now()).toLocaleTimeString("tr-TR")
     var guild_name = guild.name
-    console.log(`${colors.Bright}${colors.FgRed}[ADDED TO SERVER] ${colors.FgYellow}${now} ${colors.FgGreen}${guild_name}`)
+    console.log(`${colors.Bright}${colors.FgRed}[${config.informationMessages.addedToServer}] ${colors.FgYellow}${now} ${colors.FgGreen}${guild_name}`)
 })
 
 client.on("guildMemberAdd", async member => {
@@ -130,4 +145,4 @@ client.on("messageUpdate", async (oldMessage, newMessage) =>{
     edit_log(oldMessage, newMessage)
 })
 
-client.login(token)
+client.login(config.token)

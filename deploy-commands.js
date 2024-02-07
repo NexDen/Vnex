@@ -1,33 +1,35 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, token } = require('./config.json');
+const config = require('./config.json');
 const fs = require('node:fs');
-
+const util = require('util');
 const commands = [];
 const commandFiles = fs.readdirSync("./commands/").filter(file => file.endsWith('.js'));
+
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(config.token);
 
 (async () => {
 	try {
 		
 		if (commands.length === 0) {
-			console.log("No commands found, clearing all commands.");
-			rest.put(Routes.applicationCommands(clientId), { body: [] })
-				.then(() => console.log('All commands have been cleared.'))
+			console.log(config.informationMessages.noCommands);
+			rest.put(Routes.applicationCommands(config.clientId), { body: [] })
+			.then(() => console.log(config.informationMessages.commandWriteSuccess))
 				.catch(console.error);
 		}
 		else {
-			console.log(`Writing ${commands.length} command(s).`);
+			console.log(util.format(config.informationMessages.commandWrite, commands.length))
 			const data = await rest.put(
-				Routes.applicationCommands(clientId),
+				Routes.applicationCommands(config.clientId),
 				{ body: commands },
 			);
-			console.log(`Successfully wrote ${data.length} command(s).`);
+			console.log(util.format(config.informationMessages.commandWriteSuccess, data.length));
+
 		}
 	} catch (error) {
 		console.error(error);

@@ -6,7 +6,7 @@ async function handle_context_menu(interaction) {
     const command = interaction.client.commands.get(interaction.commandName)
             
     if (!command) {
-        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[COMMAND NOT FOUND]${colors.Reset} /${interaction.commandName}`)
+        console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.warningMessages.baseWarning}]${colors.Reset}` + util.format(config.warningMessages.commandNotFound, interaction.commandName))
     }
     
     try {
@@ -16,12 +16,12 @@ async function handle_context_menu(interaction) {
         console.error(err)
         try {
             await interaction.reply({
-                content: "An error occured.",
+                content: config.errorMessages.commandExecutionError,
                 ephemeral: true
             })
         } catch (err) {
             await interaction.editReply({
-                content: "An error occured.",
+                content: config.errorMessages.commandExecutionError,
                 ephemeral: true
             })
         }

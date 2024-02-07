@@ -9,18 +9,26 @@
 
 - How To Use:
   - Create a Discord bot from [The Discord Developer Portal](https://discord.dev).
-  - Put the bot's token and bot's client ID in a file called "config.json" in the main directory with the following syntax:
+  - Put the bot's token and bot's client ID in the included config.json file.
 
     ```json
     {
       "token":"bots-token-here",
       "clientId":"bots-clientID-here"
-    } 
+      ...
+    }
     ```
-  - Run `npm i` in the main directory and run `node index.js` to run the bot!
+  - Run `npm i` in the main directory and when its done, run `node index.js` to run the bot!
   - If it works you should see this in the output:
     ```
     [WARNING] No commands found.
+    :::     ::: ::::    ::: :::::::::: :::    ::: 
+    :+:     :+: :+:+:   :+: :+:        :+:    :+: 
+    +:+     +:+ :+:+:+  +:+ +:+         +:+  +:+  
+    +#+     +:+ +#+ +:+ +#+ +#++:++#     +#++:+   
+    +#+   +#+  +#+  +#+#+# +#+         +#+  +#+  
+      #+#+#+#   #+#   #+#+# #+#        #+#    #+# 
+        ###     ###    #### ########## ###    ### 
     Connected to {Your bot's username}!
     ```
   - Adding commands to the "commands" directory will make the warning go away.
