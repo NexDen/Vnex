@@ -1,0 +1,61 @@
+{
+    "token" : "your-bots-token-here",
+    "clientId" : "your-bots-clientId-here",
+
+    "activityName" : "Gençliğimizle",
+    "activityType" : "PLAYING",
+
+    "errorMessages" : {
+        "baseError" : "ERROR",
+
+        "noConfig" : "config.json not found in the current directory.",
+        "invalidToken" : "Invalid token specified in the configuration file.",
+
+        "commandExecutionError" : "An error occurred while executing the command."
+    },
+
+    "warningMessages" : {
+        "baseWarning" : "WARNING",
+
+        "noCommandsFolder" : "No commands folder found in the current directory, creating the folder.",
+        "noCommands" : "No commands found.",
+
+        "commandNotFound" : "Command /%s not found.",
+
+        "noData" : "Command %s doesn't contain a \"data\" property.",
+        "noExecute" : "Command %s doesn't contain an \"execute\" function.",
+        "noDataExecute" : "Command %s doesn't contain a \"data\" property or an \"execute\" function.",
+
+        "buttonHandlerNotImplemented" : "The button handler has not been implemented.",
+
+        "modalHandlerNotImplemented" : "The modal handler has not been implemented.",
+
+        "stringSelectMenuHandlerNotImplemented" : "The string select menu handler has not been implemented.",
+        "roleSelectMenuHandlerNotImplemented" : "The role select menu handler has not been implemented.",
+        "channelSelectMenuHandlerNotImplemented" : "The channel select menu handler has not been implemented.",
+        "userSelectMenuHandlerNotImplemented" : "The user select menu handler has not been implemented.",
+
+        "memberJoinHandlerNotImplemented" : "The member join handler has not been implemented.",
+        "memberLeaveHandlerNotImplemented" : "The member leave handler has not been implemented."
+
+    },
+
+    "informationMessages" : {
+        "addedToServer" : "ADDED TO SERVER",
+        "message" : "MESSAGE",
+        "messageEdit" : "MESSAGE EDIT",
+        "messageAttachments" : "MESSAGE WITH ATTACHMENTS",
+        
+        "command" : "COMMAND",
+        "commandResponse" : "COMMAND RESPONSE",
+        "commandResponseEdit" : "COMMAND RESPONSE EDIT",
+
+        "allCommandsClear" : "No commands found, clearing all commands.",
+        "allCommandsClearSuccess" : "All commands cleared successfully.",
+
+        "commandWrite" : "Writing %s command(s).",
+        "commandWriteSuccess" : "Successfully wrote %s command(s)."
+
+    }
+
+}
