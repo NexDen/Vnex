@@ -1,5 +1,5 @@
 ![Shamelessly stolen vnex logo, can take down upon request.](https://cdn.discordapp.com/attachments/1142287252446253138/1198826191927382077/vnlogo.png?ex=65c050e5&is=65addbe5&hm=720746000e169d41f4517c4eb89a826d5900b3ff3a886a2c5407a75e856ca50e&)
-# VNEX
+# vNEX
 - A Discord bot infrastructure made purely in discord.js.
 
   - Supports Context Commands and Modals.
