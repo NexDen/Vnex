@@ -65,6 +65,7 @@
             })
         }
       }
+      // This command can be run by clicking on a user and navigating to the "Apps" section, for example.
     ```
   - When ready, run `node deploy-commands.js` to deploy the command to your discord bot. (Because of Discord's caching, you may need to restart Discord on your end to see the new commands.)
   
