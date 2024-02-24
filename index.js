@@ -14,7 +14,7 @@ try {
     process.exit(1)
 }
 
-var { Client, Collection, GatewayIntentBits } = require("discord.js")
+var { Client, Collection, GatewayIntentBits, ActivityType } = require("discord.js")
 
 const fs = require("node:fs")
 const path = require("node:path")
