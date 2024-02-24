@@ -54,7 +54,11 @@ client.once('ready', async () => {
 
 
     console.log(`${colors.Bright}Connected to ${colors.Reset}${colors.FgYellow}${client.user.username}!${colors.Reset}`)
-    client.user.setPresence({ activities: [{ name: config.activityName}], status: 'online' });
+    client.user.setActivity({
+        type: ActivityType.Custom,
+        name: "customStatus",
+        state: config.activityName 
+    })
 });
 
 client.commands = new Collection();
