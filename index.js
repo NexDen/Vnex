@@ -1,5 +1,6 @@
 var colors = require("./colors.js")
 var util = require("util")
+
 global.colors = colors
 try {
     try {
@@ -8,7 +9,8 @@ try {
         console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.errorMessages.baseError}]${colors.Reset} ${config.errorMessages.noConfigFile}`)
         process.exit(1)
     }
-    global.config = require("./config.json")
+    var config = require("./config.json")
+    global.config = config
 } catch (err) {
     console.error(`${colors.Bright}${colors.Blink}${colors.BgRed}${colors.FgWhite}[${config.errorMessages.baseError}]${colors.Reset} ${config.errorMessages.invalidToken}`)
     process.exit(1)
@@ -57,7 +59,7 @@ client.once('ready', async () => {
     client.user.setActivity({
         type: ActivityType.Custom,
         name: "customStatus",
-        state: config.activityName 
+        state: config.activityName
     })
 });
 
@@ -105,6 +107,7 @@ const { handle_member_add, handle_member_leave } = require("./handlers/handle_me
 const { handle_context_menu } = require("./handlers/handle_context_menus.js")
 
 const { handle_messages } = require("./handlers/handle_messages.js")
+const { log } = require("console")
 
 
 client.on("interactionCreate", async interaction => {
